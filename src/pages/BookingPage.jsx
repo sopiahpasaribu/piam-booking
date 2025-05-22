@@ -4,15 +4,14 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import hotels from "../data/HotelData";
 import BookingModal from "../components/BookingModal";
-// import { Search, Star, ChevronDown, Sliders, Info } from "lucide-react";
-import { 
-  Search, 
-  Star, 
-  Sliders, 
-  Info, 
+import {
+  Search,
+  Star,
+  Sliders,
+  Info,
   Wifi,
-  SwimmingPool,
-  Spa,
+  Waves,          // Untuk Kolam Renang
+  Flower,         // Untuk Spa
   Dumbbell,
   Utensils,
   ParkingCircle,
@@ -22,11 +21,9 @@ import {
   ConciergeBell
 } from "lucide-react";
 
- // Facility icons mapping
 const facilityIcons = {
   "Wi-Fi": <Wifi size={18} />,
-  "Kolam Renang": <SwimmingPool size={18} />,
-  "Spa": <Spa size={18} />,
+  "Kolam Renang": <Waves size={18} />,
   "Gym": <Dumbbell size={18} />,
   "Restoran": <Utensils size={18} />,
   "Parkir Gratis": <ParkingCircle size={18} />,
@@ -35,9 +32,8 @@ const facilityIcons = {
   "Sarapan Gratis": <Coffee size={18} />,
   "Room Service": <ConciergeBell size={18} />
 };
-
-
-const BookingPage = () => {
+ 
+  const BookingPage = () => {
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [expandedHotelId, setExpandedHotelId] = useState(null);
@@ -60,11 +56,7 @@ const BookingPage = () => {
   };
 
   const toggleHotelDetails = (hotelId) => {
-    if (expandedHotelId === hotelId) {
-      setExpandedHotelId(null);
-    } else {
-      setExpandedHotelId(hotelId);
-    }
+    setExpandedHotelId(expandedHotelId === hotelId ? null : hotelId);
   };
 
   const handleBooking = (e) => {
@@ -77,7 +69,7 @@ const BookingPage = () => {
 
     const checkInDateObj = new Date(checkInDate);
     const checkOutDateObj = new Date(checkOutDate);
-    
+
     if (checkOutDateObj <= checkInDateObj) {
       alert("Check-out date must be after check-in date");
       return;
@@ -219,8 +211,8 @@ const BookingPage = () => {
                       <h4>Fasilitas:</h4>
                       <ul>
                         {hotel.fasilitas.map((fasilitas, index) => (
-                          <li key={index}>
-                            {facilityIcons[fasilitas] || null} {fasilitas}
+                         <li key={index}>
+                            {facilityIcons[fasilitas] || null}  {fasilitas}
                           </li>
                         ))}
                       </ul>
@@ -248,17 +240,6 @@ const BookingPage = () => {
           ))}
         </div>
 
-        <div className="room-facilities">
-  <h4>Fasilitas Kamar:</h4>
-  <ul>
-    {selectedRoomType.fasilitas?.map((fasilitas, index) => (
-      <li key={index}>
-        {facilityIcons[fasilitas] || null} {fasilitas}
-      </li>
-    ))}
-  </ul>
-</div>
-
         {showModal && selectedHotel && (
           <BookingModal
             selectedHotel={selectedHotel}
@@ -276,7 +257,7 @@ const BookingPage = () => {
             setCheckOutDate={setCheckOutDate}
             selectedRoomType={selectedRoomType}
             setSelectedRoomType={setSelectedRoomType}
-            facilityIcons={facilityIcons} // Pass the icons to modal
+            facilityIcons={facilityIcons}
           />
         )}
       </section>
