@@ -218,10 +218,25 @@ const handleBooking = (e) => {
   return (
     <div className="app">
       <Header />
-      <section className="home-section">
-        <h1>Your Dream Luxurious Hotel Room</h1>
-        <p>Experience the best hospitality in Indonesia.</p>
-      </section>
+
+
+      
+<section className="home-section">
+  <img 
+    src="https://images.pexels.com/photos/3201762/pexels-photo-3201762.jpeg" 
+    alt="Luxury hotel background"
+    onError={(e) => {
+      e.target.onerror = null; 
+      e.target.src = "https://via.placeholder.com/1920x1080?text=Hotel+Background"; // Fallback image
+    }}
+  />
+  <div className="home-content">
+    <h1>Your Dream Luxurious Hotel Room</h1>
+    <p>Experience the best hospitality in Indonesia.</p>
+  </div>
+</section>
+
+
 
       <section className="promo-section">
         <h2 className="promo-title">Kode Promo Hotel 🔔✨</h2>
